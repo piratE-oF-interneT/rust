@@ -1,4 +1,4 @@
-use std::ops::AddAssign;
+use std::{fs::File, ops::AddAssign};
 
 pub mod traits;
 use traits::*;
@@ -18,12 +18,44 @@ fn main() {
     // let p2 = Point { x: "ksnd", y: 45 };
     // println!("{:?}", p2);
 
-    let d1 = Dog::new("ohnny".to_string());
+    //     let d1 = Dog::new("ohnny".to_string());
 
-    let p1: Person<Dog> = Person::new("kartik".to_string(), d1);
+    //     let p1: Person<Dog> = Person::new("kartik".to_string(), d1);
 
-    p1.get_pet().sound();
-    p1.get_pet().non_danger();
+    //     p1.get_pet().sound();
+    //     p1.get_pet().non_danger();
+
+    let b1 = Book {};
+    get_summary(&b1);
+
+    let n1 = Newspaper {};
+    get_summary(&n1);
+
+    test_err();
+}
+
+trait Summary {
+    fn summarize(&self) -> ();
+}
+
+struct Book {}
+
+struct Newspaper {}
+
+impl Summary for Book {
+    fn summarize(&self) -> () {
+        println!("book summarizing");
+    }
+}
+
+impl Summary for Newspaper {
+    fn summarize(&self) -> () {
+        println!("newspaper summarizing");
+    }
+}
+
+fn get_summary<T: Summary>(item: &T) {
+    item.summarize();
 }
 
 fn get_max<T, V>(list: &[T], msg: V) -> V
@@ -64,3 +96,8 @@ struct Point<T, U> {
 //         return self.x;
 //     }
 // }
+
+fn test_err() {
+    let v1 = vec![10, 20, 30];
+    let x = &v1[99];
+}
