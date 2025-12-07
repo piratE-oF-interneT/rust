@@ -1,7 +1,10 @@
 use std::{fs::File, ops::AddAssign};
 
 pub mod traits;
-use traits::*;
+use traits::{
+    assignment::{Seminar, Workshop, print_overview},
+    *,
+};
 
 fn main() {
     // println!("Hello, world!");
@@ -25,13 +28,19 @@ fn main() {
     //     p1.get_pet().sound();
     //     p1.get_pet().non_danger();
 
-    let b1 = Book {};
-    get_summary(&b1);
+    // let b1 = Book {};
+    // get_summary(&b1);
 
-    let n1 = Newspaper {};
-    get_summary(&n1);
+    // let n1 = Newspaper {};
+    // get_summary(&n1);
 
-    test_err();
+    // test_err();
+
+    let course_1 = Workshop::new("workshop_1", "kartik", 3);
+    let course_2 = Seminar::new("seminar_1", "rohan", "mysuru");
+
+    print_overview(&course_1);
+    print_overview(&course_2);
 }
 
 trait Summary {

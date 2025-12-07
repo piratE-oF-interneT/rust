@@ -1,3 +1,7 @@
+use std::fmt::format;
+
+use assignment::Course;
+
 pub struct Person<T: Animal + non_dangerous> {
     name: String,
     pet: T,
@@ -64,5 +68,66 @@ pub struct Cow {
 impl Animal for Cow {
     fn sound(&self) -> () {
         println!("{} sound", self.name);
+    }
+}
+
+// assignment
+
+pub mod assignment {
+
+    pub trait Course {
+        fn get_overview(&self) -> String;
+    }
+    pub struct Workshop {
+        title: String,
+        instructor: String,
+        duration: u8,
+    }
+    pub struct Seminar {
+        title: String,
+        speaker: String,
+        location: String,
+    }
+
+    impl Workshop {
+        pub fn new(title: &str, instructor: &str, duration: u8) -> Self {
+            Workshop {
+                title: String::from(title),
+                instructor: String::from(instructor),
+                duration,
+            }
+        }
+    }
+    impl Seminar {
+        pub fn new(title: &str, speaker: &str, location: &str) -> Self {
+            Seminar {
+                title: String::from(title),
+                speaker: String::from(speaker),
+                location: String::from(location),
+            }
+        }
+    }
+
+    impl Course for Workshop {
+        fn get_overview(&self) -> String {
+            return format!(
+                "title : {} , instructor : {} , duration : {}",
+                self.title, self.instructor, self.duration,
+            );
+        }
+    }
+    impl Course for Seminar {
+        fn get_overview(&self) -> String {
+            return format!(
+                "title: {} , speaker: {} , location: {}",
+                self.title, self.speaker, self.location,
+            );
+        }
+    }
+
+    pub fn print_overview<T: Course>(course: &T) {
+        let overview = Course::get_overview(course);
+
+        println!("{}", overview);
     }
 }

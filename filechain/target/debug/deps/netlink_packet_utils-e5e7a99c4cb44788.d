@@ -1,0 +1,10 @@
+/home/kp/codes/rust/filechain/target/debug/deps/netlink_packet_utils-e5e7a99c4cb44788.d: /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/lib.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/macros.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/errors.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/parsers.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/traits.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/nla.rs
+
+/home/kp/codes/rust/filechain/target/debug/deps/libnetlink_packet_utils-e5e7a99c4cb44788.rmeta: /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/lib.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/macros.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/errors.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/parsers.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/traits.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/nla.rs
+
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/lib.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/macros.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/errors.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/parsers.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/traits.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-packet-utils-0.5.2/src/nla.rs:

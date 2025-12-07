@@ -1,0 +1,10 @@
+/home/kp/codes/rust/filechain/target/debug/deps/netlink_sys-b9f2dd862f8d853e.d: /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/lib.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/constants.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/socket.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/addr.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/async_socket.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/async_socket_ext.rs
+
+/home/kp/codes/rust/filechain/target/debug/deps/libnetlink_sys-b9f2dd862f8d853e.rmeta: /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/lib.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/constants.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/socket.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/addr.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/async_socket.rs /home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/async_socket_ext.rs
+
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/lib.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/constants.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/socket.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/addr.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/async_socket.rs:
+/home/kp/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/netlink-sys-0.8.7/src/async_socket_ext.rs:
