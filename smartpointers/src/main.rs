@@ -1,7 +1,10 @@
 use std::{
     cell::{Cell, RefCell, UnsafeCell},
+    f32::consts,
     ops::Deref,
 };
+
+mod boxptr;
 
 fn main() {
     // let a = Node {
@@ -41,7 +44,17 @@ fn main() {
 
 // now we will se impl of RC
 
-struct Rc<T> {}
+struct RcInner<T> {
+    value: T,
+    refcnt: usize,
+}
+struct Rc<T> {
+    inner: *const RcInner<T>,
+}
+
+// impl<T> Clone for Rc<T> {
+//     fn clone(&self) -> Self {}
+// }
 
 // now we will see the impl of the refcell
 
