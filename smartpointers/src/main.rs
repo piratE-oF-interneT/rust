@@ -5,6 +5,7 @@ use std::{
 };
 
 mod boxptr;
+mod rcptr;
 
 fn main() {
     // let a = Node {
@@ -40,6 +41,14 @@ fn main() {
     // drop(b);
 
     // dbg!(c);
+
+    let a = rcptr::MyRc::new(20);
+
+    let b = a.clone();
+
+    let c = b.clone();
+
+    println!("{:?},{:?},{:?}", *a, *b, *c)
 }
 
 // now we will se impl of RC
