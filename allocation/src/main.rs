@@ -1,9 +1,10 @@
 use std::{
     alloc::{Layout, alloc, dealloc, handle_alloc_error, realloc},
     f32::consts,
-    mem::{align_of, size_of},
-    ptr::{self, NonNull},
+    mem::{MaybeUninit, align_of, size_of},
+    ptr::{self, NonNull, drop_in_place},
 };
+pub mod arena;
 fn main() {
     // println!("{}", size_of::<u8>());
     // println!("{}", size_of::<u16>());
@@ -23,11 +24,11 @@ fn main() {
 
     // println!("size : {}, alignment : {}", size_of::<S>(), align_of::<S>());
 
-    println!(
-        "size : {}, alignment : {}",
-        size_of::<Packed>(),
-        align_of::<Packed>()
-    );
+    // println!(
+    //     "size : {}, alignment : {}",
+    //     size_of::<Packed>(),
+    //     align_of::<Packed>()
+    // );
 
     let p = Packed { a: 32, b: 89 };
 
@@ -37,7 +38,9 @@ fn main() {
         // let x = ptr::read_unaligned(&p.b);
     }
 
-    learn_layout();
+    // learn_layout();
+
+    impl_vec();
 }
 
 fn learn_layout() {
@@ -101,23 +104,31 @@ fn learn_layout() {
     Place objects via offsets */
 }
 
+use std::fmt::Display;
+
 struct RawVec<T> {
-    ptr: NonNull<T>,
+    ptr: NonNull<MaybeUninit<T>>,
     capacity: usize,
+}
+
+struct MyVec<T> {
+    buf: RawVec<T>,
+    len: usize, // current offset
 }
 
 impl<T> RawVec<T> {
     fn new(capacity: usize) -> Self {
-        let layout = Layout::array::<T>(capacity).unwrap();
+        let layout = Layout::array::<MaybeUninit<T>>(capacity).unwrap();
 
         unsafe {
-            let ptr = alloc(layout) as *mut T;
+            let ptr = alloc(layout) as *mut MaybeUninit<T>;
 
             if ptr.is_null() {
                 handle_alloc_error(layout);
             }
+            println!("raw vec allocated");
             Self {
-                ptr: unsafe { NonNull::new_unchecked(ptr) },
+                ptr: unsafe { NonNull::new_unchecked(ptr as *mut MaybeUninit<T>) },
                 capacity: capacity,
             }
         }
@@ -130,27 +141,97 @@ impl<T> RawVec<T> {
             self.capacity * 2
         };
 
-        let new_layout = Layout::array::<T>(cap).unwrap();
+        let new_layout = Layout::array::<MaybeUninit<T>>(cap).unwrap();
 
         unsafe {
+            println!("reallocation inittiated for cap : {}", self.capacity);
             let new_ptr = if self.capacity == 0 {
                 alloc(new_layout)
             } else {
-                let old_layout = Layout::array::<T>(self.capacity).unwrap();
+                let old_layout = Layout::array::<MaybeUninit<T>>(self.capacity).unwrap();
 
-                realloc(self.ptr.as_ptr() as *mut u8, new_layout, new_layout.size())
+                realloc(self.ptr.as_ptr() as *mut u8, old_layout, new_layout.size())
             };
 
             if new_ptr.is_null() {
                 handle_alloc_error(new_layout);
             }
-            self.ptr = NonNull::new_unchecked(new_ptr as *mut T);
+            self.ptr = NonNull::new_unchecked(new_ptr as *mut MaybeUninit<T>);
             self.capacity = cap;
         }
     }
 }
+impl<T> Drop for RawVec<T> {
+    fn drop(&mut self) {
+        if self.capacity == 0 {
+            return;
+        }
 
-fn impl_vec() {}
+        let layout = Layout::array::<MaybeUninit<T>>(self.capacity).unwrap();
+
+        unsafe {
+            dealloc(self.ptr.as_ptr() as *mut u8, layout);
+        }
+    }
+}
+
+impl<T> MyVec<T> {
+    fn new(cap: usize) -> Self {
+        Self {
+            buf: RawVec::new(cap),
+            len: 0,
+        }
+    }
+
+    fn push(&mut self, val: T) {
+        let old_cap = self.buf.capacity;
+        if self.len == old_cap {
+            // realloc buffer
+
+            self.buf.grow();
+        }
+
+        unsafe {
+            let dest = self.buf.ptr.as_ptr().add(self.len);
+
+            dest.write(MaybeUninit::new(val));
+
+            self.len += 1;
+        };
+    }
+
+    fn pop(&mut self) -> Option<T> {
+        if self.len == 0 {
+            return None;
+        }
+        unsafe {
+            self.len -= 1;
+            Some(self.buf.ptr.as_ptr().add(self.len).read().assume_init())
+        }
+    }
+}
+
+impl<T> Drop for MyVec<T> {
+    fn drop(&mut self) {
+        for i in 0..self.len {
+            unsafe {
+                let ptr = self.buf.ptr.as_ptr().add(i).cast::<T>();
+                drop_in_place(ptr);
+            }
+        }
+    }
+}
+
+fn impl_vec() {
+    let mut myvec = MyVec::new(0);
+    myvec.push(10);
+    myvec.push(20);
+    myvec.push(30);
+    myvec.push(40);
+    myvec.push(50);
+
+    // println!("{}", myvec);
+}
 
 struct S {
     a: u8,
