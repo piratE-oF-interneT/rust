@@ -5,6 +5,7 @@ use std::{
     ptr::{self, NonNull, drop_in_place},
 };
 pub mod arena;
+pub mod slab;
 fn main() {
     // println!("{}", size_of::<u8>());
     // println!("{}", size_of::<u16>());
